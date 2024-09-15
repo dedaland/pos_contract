@@ -13,11 +13,11 @@ contract CounterScript is Script {
 
     function run() external returns(MerchantFundSplitter) {
         vm.startBroadcast();
-
-        MerchantFundSplitter fundsplitter = MerchantFundSplitter(
+        MerchantFundSplitter fundsplitter = new MerchantFundSplitter(
             ACC0, // merchant address
             ACC1, // platform address
-            250 // platform fee
+            250, // platform fee
+            msg.sender
             );
         vm.stopBroadcast();
         return fundsplitter;

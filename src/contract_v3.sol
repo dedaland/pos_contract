@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
 /// @title MerchantFundSplitter
 /// @notice This contract splits funds between a merchant and a platform
@@ -34,7 +34,7 @@ contract MerchantFundSplitter is Ownable, ReentrancyGuard {
     /// @param _merchant Address of the merchant
     /// @param _platform Address of the platform
     /// @param _platformFee Initial platform fee in basis points
-    constructor(address _merchant, address _platform, uint256 _platformFee) {
+    constructor(address _merchant, address _platform, uint256 _platformFee, address initialOwner) Ownable(initialOwner) {
         require(_merchant != address(0) && _platform != address(0), "MFS: Zero address");
         require(_platformFee <= 10000, "MFS: Fee exceeds 100%");
         merchant = _merchant;
